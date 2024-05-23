@@ -1,0 +1,65 @@
+@startuml
+entity "Games" as games {
+    +game_id : int <<PK>>
+    --
+    title : varchar
+    release_year : int
+    developer_id : int <<FK>>
+    publisher_id : int <<FK>>
+    age_rating : varchar
+    peak_players : int
+}
+
+entity "Developers" as developers {
+    +developer_id : int <<PK>>
+    --
+    name : varchar
+    employee_count : int
+    games_released : int
+}
+
+entity "Publishers" as publishers {
+    +publisher_id : int <<PK>>
+    --
+    name : varchar
+    games_published : int
+    average_annual_revenue : decimal
+}
+
+entity "Genres" as genres {
+    +genre_id : int <<PK>>
+    --
+    genre_name : varchar
+}
+
+entity "GameGenres" as game_genres {
+    +game_id : int <<PK>><<FK>>
+    +genre_id : int <<PK>><<FK>>
+}
+
+entity "Users" as users {
+    +user_id : int <<PK>>
+    --
+    username : varchar
+    email : varchar
+    age : int
+    gender : varchar
+}
+
+entity "Ratings" as ratings {
+    +rating_id : int <<PK>>
+    --
+    game_id : int <<FK>>
+    user_id : int <<FK>>
+    score : int
+    review : text
+    rating_date : date
+}
+
+games }|..|{ developers : "developed by"
+games }|..|{ publishers : "published by"
+games ||--|| game_genres : "belongs to"
+genres ||--|| game_genres : "categorized as"
+games ||--|| ratings : "rated in"
+users ||--|| ratings : "rated by"
+@enduml

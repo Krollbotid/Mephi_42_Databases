@@ -5,6 +5,7 @@ def main():
     structure = "../sql/table_structure/"
     data = "../sql/data/"
     sql_file_paths = [
+        structure + "reset.sql",
         structure + "developers.sql",
         structure + "publishers.sql",
         structure + "genres.sql",

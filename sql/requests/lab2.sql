@@ -4,13 +4,13 @@ SELECT * FROM Games;
 SELECT title, release_year FROM Games WHERE release_year > 2016;
 -- Запрос 3: Упорядоченная выборка разработчиков по количеству выпущенных игр
 SELECT name, games_released FROM Developers ORDER BY games_released DESC;
--- Запрос 4: Выборка игр с использованием функции для расчета среднего количества игроков
-SELECT title, peak_players, round(peak_players / 1000, 1) AS peak_players_in_thousands FROM Games;
--- Запрос 5: Выборка максимального количества выпущенных игр по разработчикам
-SELECT name, MAX(games_released) AS max_games_released FROM Developers GROUP BY name;
--- Запрос 6: Выборка уникальных жанров
-SELECT DISTINCT genre_name FROM Genres;
+-- Запрос 4: Выборка игр с выраженным в тысячах количеством игроков в пике
+SELECT title, ROUND(peak_players/1000) thousands_of_players_in_peak FROM Games
+-- Запрос 5: Запрос, который вычисляет среднюю оценку каждой игры и округляет до целого
+SELECT g.title, ROUND(AVG(r.score)) AS average_score FROM Games g JOIN Ratings r ON g.game_id = r.game_id GROUP BY g.title;
+-- Запрос 6: Выборка уникальных возрастных рейтингов
+SELECT DISTINCT age_rating FROM Games;
 -- Запрос 7: Псевдо-выборка для оценки выражения
-SELECT (3 + 5) AS result;
--- Запрос 8: Выборка оценок с сортировкой по дате
-SELECT * FROM Ratings ORDER BY rating_date DESC;
+SELECT (137*548) AS result;
+-- Запрос 8: Очистка таблиц на диске и статистики от удаленных записей.
+VACUUM FULL;

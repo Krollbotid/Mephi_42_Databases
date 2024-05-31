@@ -56,10 +56,22 @@ entity "Ratings" as ratings {
     rating_date : date
 }
 
+entity "DeveloperPublisherRelationships" as developer_publisher_relationships {
+    +relationship_id : int <<PK>>
+    --
+    developer_id : int <<FK>>
+    publisher_id : int <<FK>>
+    relationship_type : varchar
+    start_date : date
+    end_date : date
+}
+
 games }|..|{ developers : "developed by"
 games }|..|{ publishers : "published by"
 games ||--|| game_genres : "belongs to"
 genres ||--|| game_genres : "categorized as"
 games ||--|| ratings : "rated in"
 users ||--|| ratings : "rated by"
+developers ||--o{ developer_publisher_relationships : "has relationship"
+publishers ||--o{ developer_publisher_relationships : "has relationship"
 @enduml

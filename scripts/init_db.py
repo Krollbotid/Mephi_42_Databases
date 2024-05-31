@@ -5,8 +5,16 @@ def main():
     structure = "../sql/table_structure/"
     data = "../sql/data/"
     sql_file_paths = [
-        structure + "create.sql",
-        # data + "fill_db.sql",
+        structure + "developers.sql",
+        structure + "publishers.sql",
+        structure + "genres.sql",
+        structure + "games.sql",
+        structure + "game_genres.sql",
+        structure + "users.sql",
+        structure + "ratings.sql",
+        structure + "developer_publisher_relationships.sql",
+        structure + "relations.sql",
+        data + "fill_db.sql"
     ]
 
     conn = connect_to_db(**db_config)
